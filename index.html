@@ -95,7 +95,7 @@
     <script>
       const tg = window.Telegram && window.Telegram.WebApp;
       try { if (tg) { tg.ready(); tg.expand(); tg.setHeaderColor("#eef9ff"); tg.setBackgroundColor("#eef9ff"); } } catch {}
-      const BOT = "samokr_ytka_bot";
+      const BOT = "zub_clinic_bot";
       const openBot = () => { const url = "https://t.me/" + BOT; if (tg && tg.openTelegramLink) tg.openTelegramLink(url); else window.open(url, "_blank"); };
       document.querySelectorAll('[data-action="book"]').forEach((button) => button.addEventListener("click", openBot));
       document.querySelectorAll("nav button").forEach((button) => button.addEventListener("click", () => { const target = document.getElementById(button.dataset.target); if (target) target.scrollIntoView({ behavior:"smooth", block:"start" }); document.querySelectorAll("nav button").forEach((item) => item.removeAttribute("aria-current")); button.setAttribute("aria-current", "page"); }));
