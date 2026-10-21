@@ -25,6 +25,7 @@
       .brand-note { display:block; color:var(--muted); font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; }
       .status { display:flex; align-items:center; gap:6px; padding:8px 11px; border-radius:99px; background:var(--surface-mint); color:#268b74; font-size:12px; font-weight:800; }
       .status i { width:7px; height:7px; border-radius:50%; background:var(--mint); }
+      .status.closed i { background:#e47782; }
       .hero { position:relative; overflow:hidden; padding:27px 24px 25px; border-radius:30px; background:linear-gradient(140deg,#c9efff 0%,#edfaff 69%,#d7f8ef 100%); box-shadow:var(--shadow); }
       .hero::after { content:""; position:absolute; right:-40px; bottom:-60px; width:180px; height:180px; border-radius:50%; background:rgba(255,255,255,.45); }
       .eyebrow { position:relative; z-index:1; margin:0 0 9px; color:var(--blue-dark); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
@@ -49,6 +50,41 @@
       .service-title { font-size:16px; font-weight:800; }
       .service-note { margin-top:3px; color:var(--muted); font-size:13px; }
       .service-price { margin-top:auto; padding-top:12px; color:var(--blue-dark); font-size:14px; font-weight:800; }
+      .booking-panel { padding:20px; border:1.5px solid var(--line); border-radius:24px; background:var(--surface); box-shadow:var(--shadow); }
+      .booking-label { display:block; margin:0 0 10px; color:var(--muted); font-size:13px; font-weight:800; }
+      .choice-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:20px; }
+      .choice { min-height:47px; padding:10px 12px; border:1.5px solid var(--line); border-radius:14px; background:#fff; text-align:left; font-size:13px; font-weight:800; }
+      .choice small { display:block; margin-top:2px; color:var(--muted); font-size:11px; font-weight:600; }
+      .choice em { display:inline-block; margin-top:5px; padding:2px 7px; border-radius:99px; background:var(--surface-mint); color:#268b74; font-size:10px; font-style:normal; font-weight:800; }
+      .doctor-info { margin:-8px 0 20px; padding:14px; border-radius:16px; background:var(--surface-blue); color:var(--text); }
+      .doctor-info strong { display:block; font-size:14px; }
+      .doctor-info p { margin:4px 0 0; color:var(--muted); font-size:12px; }
+      .doctor-info details { margin-top:9px; padding:0; border:0; background:transparent; }
+      .doctor-info summary { color:var(--blue-dark); font-size:12px; }
+      .doctor-info summary::after { font-size:17px; }
+      .doctor-info details p { margin-top:6px; }
+      .choice[aria-pressed="true"] { border-color:var(--blue); background:var(--surface-blue); color:var(--blue-dark); }
+      .date-grid { display:flex; gap:8px; overflow-x:auto; padding-bottom:5px; margin-bottom:20px; scrollbar-width:none; }
+      .date-grid::-webkit-scrollbar { display:none; }
+      .date-choice { flex:0 0 72px; padding:10px 6px; border:1.5px solid var(--line); border-radius:15px; background:#fff; text-align:center; }
+      .date-choice b { display:block; font-size:13px; }
+      .date-choice span { display:block; margin-top:2px; color:var(--muted); font-size:12px; }
+      .date-choice[aria-pressed="true"] { border-color:var(--blue); background:var(--surface-blue); color:var(--blue-dark); }
+      .time-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:20px; }
+      .time-choice { padding:11px 4px; border:1.5px solid var(--line); border-radius:13px; background:#fff; font-size:14px; font-weight:800; }
+      .time-choice[aria-pressed="true"] { border-color:var(--blue); background:var(--blue-dark); color:#fff; }
+      .booking-note { min-height:20px; margin:0 0 12px; color:var(--muted); font-size:13px; }
+      .booking-confirm { width:100%; border:0; border-radius:15px; padding:14px; background:var(--blue-dark); color:#fff; font-weight:800; }
+      .booking-confirm:disabled { cursor:not-allowed; opacity:.45; }
+      .demo-badge { display:inline-flex; margin-bottom:12px; padding:5px 9px; border-radius:99px; background:#fff2dd; color:#b67826; font-size:11px; font-weight:800; }
+      .appointment-list { display:grid; gap:10px; }
+      .appointment { padding:16px; border:1.5px solid var(--line); border-radius:20px; background:var(--surface); }
+      .appointment strong { display:block; font-size:15px; }
+      .appointment p { margin:4px 0 13px; color:var(--muted); font-size:13px; }
+      .appointment-actions { display:flex; gap:8px; }
+      .appointment-actions button { flex:1; padding:10px; border:1.5px solid var(--line); border-radius:12px; background:#fff; color:var(--blue-dark); font-size:12px; font-weight:800; }
+      .appointment-actions button:last-child { color:#b36d76; }
+      .empty-appointments { padding:16px; border-radius:18px; background:rgba(255,255,255,.72); color:var(--muted); font-size:14px; }
       .steps { display:grid; gap:10px; }
       .step { display:flex; align-items:center; gap:14px; padding:14px; border-radius:19px; background:rgba(255,255,255,.72); }
       .step-number { display:grid; flex:0 0 36px; place-items:center; width:36px; height:36px; border-radius:13px; background:var(--surface-blue); color:var(--blue-dark); font-weight:800; }
@@ -79,25 +115,68 @@
   </head>
   <body>
     <main class="app">
-      <header class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M7.8 4.8c1.5-1.4 2.5.2 4.2.2s2.7-1.6 4.2-.2c2.5 2.2 2.2 5.4 1.5 8.1-.7 2.7-1.6 6.1-3.2 6.1-1.5 0-1.1-3.4-2.5-3.4s-1 3.4-2.5 3.4c-1.6 0-2.5-3.4-3.2-6.1-.7-2.7-1-5.9 1.5-8.1Z"/><path d="M9.2 3.8C9.6 2.7 10.5 2 12 2s2.4.7 2.8 1.8"/></svg></span><span><span class="brand-name">Zub Clinic</span><span class="brand-note">стоматология рядом</span></span></div><span class="status"><i></i>Открыты</span></header>
+      <header class="topbar"><div class="brand"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M7.8 4.8c1.5-1.4 2.5.2 4.2.2s2.7-1.6 4.2-.2c2.5 2.2 2.2 5.4 1.5 8.1-.7 2.7-1.6 6.1-3.2 6.1-1.5 0-1.1-3.4-2.5-3.4s-1 3.4-2.5 3.4c-1.6 0-2.5-3.4-3.2-6.1-.7-2.7-1-5.9 1.5-8.1Z"/><path d="M9.2 3.8C9.6 2.7 10.5 2 12 2s2.4.7 2.8 1.8"/></svg></span><span><span class="brand-name">Zub Clinic</span><span class="brand-note">стоматология рядом</span></span></div><span class="status" id="clinic-status"><i></i><span>Проверяем график…</span></span></header>
       <section id="home"><div class="hero"><p class="eyebrow">Забота без стресса</p><h1>Улыбка, которой хочется делиться</h1><p>Запишитесь к врачу онлайн — выберите услугу, день и удобное время.</p><button class="primary" data-action="book">Записаться <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button><span class="hero-art" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M7.8 4.8c1.5-1.4 2.5.2 4.2.2s2.7-1.6 4.2-.2c2.5 2.2 2.2 5.4 1.5 8.1-.7 2.7-1.6 6.1-3.2 6.1-1.5 0-1.1-3.4-2.5-3.4s-1 3.4-2.5 3.4c-1.6 0-2.5-3.4-3.2-6.1-.7-2.7-1-5.9 1.5-8.1Z"/><path d="M9.2 3.8C9.6 2.7 10.5 2 12 2s2.4.7 2.8 1.8"/></svg></span></div></section>
       <section class="section" id="services"><div class="section-head"><h2>Выберите заботу</h2><span>пн–сб · 10:00–19:00</span></div><div class="services">
-        <button class="service" data-action="book"><span class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8.5"/></svg></span><span class="service-title">Консультация</span><span class="service-note">первичный осмотр</span><span class="service-price">от 1 000 ₽</span></button>
-        <button class="service" data-action="book"><span class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="m5 14 2-8 3 5 2-7 2 7 3-5 2 8"/><path d="M5 14c0 4 3.1 7 7 7s7-3 7-7"/></svg></span><span class="service-title">Чистка</span><span class="service-note">свежесть и блеск</span><span class="service-price">от 4 500 ₽</span></button>
-        <button class="service" data-action="book"><span class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M7.8 4.8c1.5-1.4 2.5.2 4.2.2s2.7-1.6 4.2-.2c2.5 2.2 2.2 5.4 1.5 8.1-.7 2.7-1.6 6.1-3.2 6.1-1.5 0-1.1-3.4-2.5-3.4s-1 3.4-2.5 3.4c-1.6 0-2.5-3.4-3.2-6.1-.7-2.7-1-5.9 1.5-8.1Z"/></svg></span><span class="service-title">Лечение</span><span class="service-note">бережно и спокойно</span><span class="service-price">от 6 000 ₽</span></button>
-        <button class="service" data-action="book"><span class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/><circle cx="12" cy="12" r="8.5"/></svg></span><span class="service-title">Другой вопрос</span><span class="service-note">подберём лечение</span><span class="service-price">уточнить в боте</span></button>
+        <button class="service" data-service="consult"><span class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8.5"/></svg></span><span class="service-title">Консультация</span><span class="service-note">первичный осмотр</span><span class="service-price">от 1 000 ₽</span></button>
+        <button class="service" data-service="clean"><span class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="m5 14 2-8 3 5 2-7 2 7 3-5 2 8"/><path d="M5 14c0 4 3.1 7 7 7s7-3 7-7"/></svg></span><span class="service-title">Чистка</span><span class="service-note">свежесть и блеск</span><span class="service-price">от 4 500 ₽</span></button>
+        <button class="service" data-service="caries"><span class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M7.8 4.8c1.5-1.4 2.5.2 4.2.2s2.7-1.6 4.2-.2c2.5 2.2 2.2 5.4 1.5 8.1-.7 2.7-1.6 6.1-3.2 6.1-1.5 0-1.1-3.4-2.5-3.4s-1 3.4-2.5 3.4c-1.6 0-2.5-3.4-3.2-6.1-.7-2.7-1-5.9 1.5-8.1Z"/></svg></span><span class="service-title">Лечение</span><span class="service-note">бережно и спокойно</span><span class="service-price">от 6 000 ₽</span></button>
+        <button class="service" data-service="consult"><span class="service-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/><circle cx="12" cy="12" r="8.5"/></svg></span><span class="service-title">Другой вопрос</span><span class="service-note">подберём лечение</span><span class="service-price">через консультацию</span></button>
       </div></section>
+      <section class="section" id="booking"><div class="section-head"><h2>Запись онлайн</h2><span>демо-режим</span></div><div class="booking-panel"><span class="demo-badge">Пока пример интерфейса</span><label class="booking-label">1. Врач</label><div class="choice-grid" id="doctor-list"></div><div id="doctor-info"></div><label class="booking-label">2. День</label><div class="date-grid" id="date-list"></div><label class="booking-label">3. Время</label><div class="time-grid" id="time-list"></div><p class="booking-note" id="booking-note">Выберите врача и время приёма.</p><button class="booking-confirm" id="confirm-booking" disabled>Подтвердить запись</button></div></section>
+      <section class="section" id="appointments"><div class="section-head"><h2>Мои записи</h2><span>можно перенести</span></div><div class="appointment-list" id="appointment-list"></div></section>
       <section class="section" id="how"><div class="section-head"><h2>Как всё проходит</h2></div><div class="steps"><div class="step"><b class="step-number">01</b><span><strong>Выберите услугу</strong><span>Расскажем, что подойдёт именно вам</span></span></div><div class="step"><b class="step-number">02</b><span><strong>Найдите удобное окно</strong><span>Покажем только свободные слоты</span></span></div><div class="step"><b class="step-number">03</b><span><strong>Получите напоминание</strong><span>За день и за два часа до визита</span></span></div></div></section>
       <section class="section"><div class="info-card"><span class="info-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span><strong>Мы рядом с вами</strong><span>Москва · работаем каждый день кроме воскресенья</span></span></div></section>
-      <section class="section" id="help"><div class="section-head"><h2>Частые вопросы</h2></div><div class="faq"><details><summary>Можно ли отменить запись?</summary><p>Да, откройте в боте раздел «Мои записи» и нажмите кнопку отмены.</p></details><details><summary>Как перенести визит?</summary><p>Напишите нам в поддержку — мы подберём новое удобное время.</p></details><details><summary>Что взять с собой?</summary><p>Только хорошее настроение. Мы бережно проведём консультацию и всё объясним.</p></details></div></section>
+      <section class="section" id="help"><div class="section-head"><h2>Частые вопросы</h2></div><div class="faq"><details><summary>Можно ли отменить запись?</summary><p>Да, откройте раздел «Мои записи» прямо здесь и нажмите кнопку отмены.</p></details><details><summary>Как перенести визит?</summary><p>Откройте «Мои записи», нажмите «Перенести» и выберите новое время.</p></details><details><summary>Что взять с собой?</summary><p>Только хорошее настроение. Мы бережно проведём консультацию и всё объясним.</p></details></div></section>
     </main>
-    <nav><div class="nav-inner"><button data-target="home" aria-current="page"><svg viewBox="0 0 24 24"><path d="m4 10 8-7 8 7v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/><path d="M9 21v-6h6v6"/></svg>Главная</button><button data-target="services"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>Услуги</button><button data-target="how"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg>Как работает</button><button data-target="help"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></svg>Помощь</button></div></nav>
+    <nav><div class="nav-inner"><button data-target="home" aria-current="page"><svg viewBox="0 0 24 24"><path d="m4 10 8-7 8 7v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/><path d="M9 21v-6h6v6"/></svg>Главная</button><button data-target="services"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>Услуги</button><button data-target="appointments"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Мои записи</button><button data-target="help"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></svg>Помощь</button></div></nav>
     <script>
       const tg = window.Telegram && window.Telegram.WebApp;
       try { if (tg) { tg.ready(); tg.expand(); tg.setHeaderColor("#eef9ff"); tg.setBackgroundColor("#eef9ff"); } } catch {}
-      const BOT = "zub_clinic_bot";
-      const openBot = () => { const url = "https://t.me/" + BOT; if (tg && tg.openTelegramLink) tg.openTelegramLink(url); else window.open(url, "_blank"); };
-      document.querySelectorAll('[data-action="book"]').forEach((button) => button.addEventListener("click", openBot));
+      const doctors = [{ id:"any", name:"Любой врач", specialty:"ближайшее время", note:"подберем специалиста", education:"Подберём специалиста под вашу задачу.", review:"Пациенты ценят нас за спокойный и понятный подход." }, { id:"anna", name:"Анна Петрова", specialty:"терапевт", note:"8 лет опыта", education:"МГМСУ им. А. И. Евдокимова, стоматологический факультет. Повышение квалификации по эстетической реставрации.", review:"«Всё объяснила без сложных слов, приём прошёл очень спокойно»." }, { id:"maxim", name:"Максим Орлов", specialty:"ортодонт", note:"10 лет опыта", education:"Первый МГМУ им. И. М. Сеченова. Ординатура по ортодонтии, работа с элайнерами и брекет-системами.", review:"«Наконец-то поняла, какой план лечения мне подходит»." }, { id:"elena", name:"Елена Смирнова", specialty:"терапевт", note:"6 лет опыта", education:"РНИМУ им. Н. И. Пирогова. Специализация по лечению кариеса и работе с микроскопом.", review:"«Очень внимательный врач, ничего не навязывает»." }, { id:"kirill", name:"Кирилл Волков", specialty:"хирург-имплантолог", note:"12 лет опыта", education:"СПбГУ, челюстно-лицевая хирургия. Имплантация и сложные удаления.", review:"«Операция прошла быстрее и легче, чем я ожидала»." }, { id:"sofia", name:"Софья Белова", specialty:"детский стоматолог", note:"7 лет опыта", education:"Казанский ГМУ. Детская стоматология и мягкая адаптация маленьких пациентов.", review:"«Ребёнок впервые вышел от стоматолога без слёз»." }];
+      const services = { consult:"Консультация", clean:"Профессиональная чистка", caries:"Лечение кариеса" };
+      const state = { service:"consult", doctor:"any", date:0, time:"", editingId:null };
+      const doctorList = document.getElementById("doctor-list");
+      const doctorInfo = document.getElementById("doctor-info");
+      const dateList = document.getElementById("date-list");
+      const timeList = document.getElementById("time-list");
+      const note = document.getElementById("booking-note");
+      const confirm = document.getElementById("confirm-booking");
+      const dateFormatter = new Intl.DateTimeFormat("ru-RU", { weekday:"short", day:"numeric", month:"short" });
+      const timeSlots = ["10:00", "10:30", "11:00", "11:30", "12:00", "13:30", "14:00", "14:30", "15:30", "16:00", "17:00", "18:00"];
+      const dates = Array.from({ length:5 }, (_, index) => { const date = new Date(); date.setDate(date.getDate() + index + 1); return date; });
+      const select = (key, value) => { state[key] = value; renderBooking(); };
+      function renderBooking() {
+        doctorList.innerHTML = doctors.map((doctor) => `<button class="choice" aria-pressed="${state.doctor === doctor.id}" data-doctor="${doctor.id}">${doctor.name}<em>${doctor.specialty}</em><small>${doctor.note}</small></button>`).join("");
+        const selectedDoctor = doctors.find((doctor) => doctor.id === state.doctor) || doctors[0];
+        doctorInfo.innerHTML = `<div class="doctor-info"><strong>${selectedDoctor.name} · ${selectedDoctor.specialty}</strong><p>${selectedDoctor.note}</p><details><summary>Образование и отзывы</summary><p><b>Образование:</b> ${selectedDoctor.education}</p><p><b>Отзыв:</b> ${selectedDoctor.review}</p></details></div>`;
+        dateList.innerHTML = dates.map((date, index) => { const parts = dateFormatter.formatToParts(date); const weekday = parts.find((part) => part.type === "weekday")?.value || ""; const day = parts.find((part) => part.type === "day")?.value || ""; return `<button class="date-choice" aria-pressed="${state.date === index}" data-date="${index}"><b>${weekday}</b><span>${day} ${date.toLocaleDateString("ru-RU", { month:"short" }).replace(".", "")}</span></button>`; }).join("");
+        timeList.innerHTML = timeSlots.map((time) => `<button class="time-choice" aria-pressed="${state.time === time}" data-time="${time}">${time}</button>`).join("");
+        doctorList.querySelectorAll("[data-doctor]").forEach((button) => button.addEventListener("click", () => select("doctor", button.dataset.doctor)));
+        dateList.querySelectorAll("[data-date]").forEach((button) => button.addEventListener("click", () => select("date", Number(button.dataset.date))));
+        timeList.querySelectorAll("[data-time]").forEach((button) => button.addEventListener("click", () => select("time", button.dataset.time)));
+        confirm.disabled = !state.time;
+        confirm.textContent = state.editingId ? "Сохранить новое время" : "Подтвердить запись";
+        note.textContent = state.time ? `${services[state.service]} · ${doctors.find((doctor) => doctor.id === state.doctor)?.name} · ${state.time}` : "Выберите врача и время приёма.";
+        renderAppointments();
+      }
+      document.querySelectorAll("[data-service]").forEach((button) => button.addEventListener("click", () => { state.service = button.dataset.service; document.getElementById("booking").scrollIntoView({ behavior:"smooth", block:"start" }); renderBooking(); }));
+      document.querySelectorAll('[data-action="book"]').forEach((button) => button.addEventListener("click", () => document.getElementById("booking").scrollIntoView({ behavior:"smooth", block:"start" })));
+      function getAppointments() { try { return JSON.parse(localStorage.getItem("zub-demo-appointments") || "[]"); } catch { return []; } }
+      function saveAppointments(appointments) { localStorage.setItem("zub-demo-appointments", JSON.stringify(appointments)); }
+      function displayDate(date) { return new Intl.DateTimeFormat("ru-RU", { weekday:"long", day:"numeric", month:"long" }).format(new Date(date)); }
+      function renderAppointments() {
+        const list = document.getElementById("appointment-list");
+        const appointments = getAppointments();
+        list.innerHTML = appointments.length ? appointments.map((appointment) => { const doctor = doctors.find((item) => item.id === appointment.doctor); return `<article class="appointment"><strong>${services[appointment.service]}</strong><p>${displayDate(appointment.date)} · ${appointment.time}<br>${doctor?.name || "Врач не выбран"} · ${doctor?.specialty || ""}</p><div class="appointment-actions"><button data-reschedule="${appointment.id}">Перенести</button><button data-cancel="${appointment.id}">Отменить</button></div></article>`; }).join("") : '<div class="empty-appointments">Здесь появятся ваши записи. Выберите услугу выше, чтобы создать первую.</div>';
+        list.querySelectorAll("[data-reschedule]").forEach((button) => button.addEventListener("click", () => { const appointment = getAppointments().find((item) => item.id === button.dataset.reschedule); if (!appointment) return; state.service = appointment.service; state.doctor = appointment.doctor; state.date = Math.max(0, dates.findIndex((date) => date.toISOString().slice(0, 10) === appointment.date)); state.time = appointment.time; state.editingId = appointment.id; renderBooking(); document.getElementById("booking").scrollIntoView({ behavior:"smooth", block:"start" }); }));
+        list.querySelectorAll("[data-cancel]").forEach((button) => button.addEventListener("click", () => { saveAppointments(getAppointments().filter((item) => item.id !== button.dataset.cancel)); renderAppointments(); }));
+      }
+      confirm.addEventListener("click", () => { if (!state.time) return; const appointments = getAppointments(); const appointment = { id:state.editingId || String(Date.now()), service:state.service, doctor:state.doctor, date:dates[state.date].toISOString().slice(0, 10), time:state.time }; saveAppointments(state.editingId ? appointments.map((item) => item.id === state.editingId ? appointment : item) : [...appointments, appointment]); state.editingId = null; note.textContent = "Запись сохранена в демо-режиме. Её можно перенести в разделе «Мои записи»."; state.time = ""; renderBooking(); document.getElementById("appointments").scrollIntoView({ behavior:"smooth", block:"start" }); });
+      function updateClinicStatus() { const now = new Date(); const moscow = new Intl.DateTimeFormat("en-US", { timeZone:"Europe/Moscow", weekday:"short", hour:"numeric", minute:"numeric", hour12:false }).formatToParts(now).reduce((result, part) => { result[part.type] = part.value; return result; }, {}); const hour = Number(moscow.hour); const isSunday = moscow.weekday === "Sun"; const open = !isSunday && hour >= 10 && hour < 19; const nextOpening = isSunday || (moscow.weekday === "Sat" && hour >= 19) ? "в понедельник в 10:00" : "завтра в 10:00"; const status = document.querySelector("#clinic-status span"); const indicator = document.querySelector("#clinic-status"); status.textContent = open ? "Открыты до 19:00" : hour < 10 && !isSunday ? "Откроемся в 10:00" : `Закрыты · откроемся ${nextOpening}`; indicator.classList.toggle("closed", !open); indicator.style.background = open ? "var(--surface-mint)" : "#fff2dd"; indicator.style.color = open ? "#268b74" : "#b67826"; }
+      updateClinicStatus();
+      setInterval(updateClinicStatus, 60000);
+      renderBooking();
       document.querySelectorAll("nav button").forEach((button) => button.addEventListener("click", () => { const target = document.getElementById(button.dataset.target); if (target) target.scrollIntoView({ behavior:"smooth", block:"start" }); document.querySelectorAll("nav button").forEach((item) => item.removeAttribute("aria-current")); button.setAttribute("aria-current", "page"); }));
     </script>
   </body>
