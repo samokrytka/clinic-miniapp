@@ -566,15 +566,16 @@
         z-index: 20;
         inset: 0;
         display: grid;
-        align-items: end;
+        align-items: center;
         justify-items: center;
-        padding: 16px 16px calc(env(safe-area-inset-bottom, 0px) + 76px);
+        padding: 24px 16px calc(env(safe-area-inset-bottom, 0px) + 90px);
         background: rgba(3, 8, 10, 0.78);
         backdrop-filter: blur(8px);
       }
       .reschedule-dialog {
         width: min(100%, 520px);
-        max-height: 86vh;
+        max-height: calc(100vh - 140px);
+        max-height: calc(100dvh - 140px);
         overflow: auto;
         padding: 21px;
         border: 1px solid #39616a;
@@ -637,10 +638,14 @@
         gap: 8px;
       }
       .reschedule-actions {
+        position: sticky;
+        bottom: -21px;
         display: grid;
         grid-template-columns: 1fr 1.4fr;
         gap: 8px;
-        margin-top: 18px;
+        margin: 18px -1px -21px;
+        padding: 12px 1px 21px;
+        background: #172327;
       }
       .reschedule-actions button {
         min-height: 46px;
