@@ -140,8 +140,9 @@
         display: flex;
         align-items: center;
         gap: 7px;
-        padding: 7px 0 7px 10px;
+        padding: 7px 10px;
         border-left: 2px solid var(--mint);
+        border-radius: 10px;
         background: transparent;
         color: var(--mint);
         font-size: 11px;
@@ -557,6 +558,107 @@
         cursor: not-allowed;
         opacity: 0.45;
       }
+      .reschedule-modal[hidden] {
+        display: none;
+      }
+      .reschedule-modal {
+        position: fixed;
+        z-index: 20;
+        inset: 0;
+        display: grid;
+        align-items: end;
+        justify-items: center;
+        padding: 16px;
+        background: rgba(3, 8, 10, 0.78);
+        backdrop-filter: blur(8px);
+      }
+      .reschedule-dialog {
+        width: min(100%, 520px);
+        max-height: 86vh;
+        overflow: auto;
+        padding: 21px;
+        border: 1px solid #39616a;
+        border-radius: 24px;
+        background: #172327;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      }
+      .reschedule-head {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .reschedule-head h3 {
+        margin: 0;
+        font-size: 21px;
+        letter-spacing: -0.05em;
+      }
+      .reschedule-head p {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .reschedule-close {
+        display: grid;
+        flex: 0 0 34px;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: #10191c;
+        color: var(--muted);
+        font-size: 20px;
+      }
+      .reschedule-label {
+        display: block;
+        margin: 16px 0 9px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .reschedule-date-grid {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 3px;
+        scrollbar-width: none;
+      }
+      .reschedule-date-grid::-webkit-scrollbar {
+        display: none;
+      }
+      .reschedule-date-grid .date-choice {
+        flex-basis: 78px;
+      }
+      .reschedule-time-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .reschedule-actions {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 8px;
+        margin-top: 18px;
+      }
+      .reschedule-actions button {
+        min-height: 46px;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        background: #10191c;
+        color: var(--muted);
+        font-weight: 800;
+      }
+      .reschedule-actions button:last-child {
+        border-color: var(--blue-dark);
+        background: var(--blue-dark);
+        color: #fff;
+      }
+      .reschedule-actions button:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+      }
       .demo-badge {
         display: inline-flex;
         margin-bottom: 12px;
@@ -934,6 +1036,38 @@
           </div>
           <div class="appointment-list" id="appointment-list"></div>
         </section>
+        <div class="reschedule-modal" id="reschedule-modal" hidden>
+          <div
+            class="reschedule-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="reschedule-title"
+          >
+            <div class="reschedule-head">
+              <div>
+                <h3 id="reschedule-title">Перенести визит</h3>
+                <p id="reschedule-summary">Выберите новый день и время</p>
+              </div>
+              <button
+                class="reschedule-close"
+                id="reschedule-close"
+                aria-label="Закрыть"
+              >
+                ×
+              </button>
+            </div>
+            <label class="reschedule-label">Новый день</label>
+            <div class="reschedule-date-grid" id="reschedule-date-list"></div>
+            <label class="reschedule-label">Новое время</label>
+            <div class="reschedule-time-grid" id="reschedule-time-list"></div>
+            <div class="reschedule-actions">
+              <button id="reschedule-cancel">Оставить как есть</button>
+              <button id="reschedule-confirm" disabled>
+                Сохранить перенос
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="screen" id="screen-help">
         <section class="section" id="how">
@@ -1113,6 +1247,9 @@
         date: 0,
         time: "",
         editingId: null,
+        reschedulingId: null,
+        rescheduleDate: 0,
+        rescheduleTime: "",
       };
       const doctorList = document.getElementById("doctor-list");
       const doctorInfo = document.getElementById("doctor-info");
@@ -1120,6 +1257,15 @@
       const timeList = document.getElementById("time-list");
       const note = document.getElementById("booking-note");
       const confirm = document.getElementById("confirm-booking");
+      const rescheduleModal = document.getElementById("reschedule-modal");
+      const rescheduleSummary = document.getElementById("reschedule-summary");
+      const rescheduleDateList = document.getElementById(
+        "reschedule-date-list",
+      );
+      const rescheduleTimeList = document.getElementById(
+        "reschedule-time-list",
+      );
+      const rescheduleConfirm = document.getElementById("reschedule-confirm");
       const dateFormatter = new Intl.DateTimeFormat("ru-RU", {
         weekday: "short",
         day: "numeric",
@@ -1203,6 +1349,61 @@
           : "Выберите врача и время приёма.";
         renderAppointments();
       }
+      function renderReschedule() {
+        rescheduleDateList.innerHTML = dates
+          .map((date, index) => {
+            const parts = dateFormatter.formatToParts(date);
+            const weekday =
+              parts.find((part) => part.type === "weekday")?.value || "";
+            const day = parts.find((part) => part.type === "day")?.value || "";
+            return `<button class="date-choice" aria-pressed="${state.rescheduleDate === index}" data-reschedule-date="${index}"><b>${weekday}</b><span>${day} ${date.toLocaleDateString("ru-RU", { month: "short" }).replace(".", "")}</span></button>`;
+          })
+          .join("");
+        rescheduleTimeList.innerHTML = timeSlots
+          .map(
+            (time) =>
+              `<button class="time-choice" aria-pressed="${state.rescheduleTime === time}" data-reschedule-time="${time}">${time}</button>`,
+          )
+          .join("");
+        rescheduleDateList
+          .querySelectorAll("[data-reschedule-date]")
+          .forEach((button) =>
+            button.addEventListener("click", () => {
+              state.rescheduleDate = Number(button.dataset.rescheduleDate);
+              renderReschedule();
+            }),
+          );
+        rescheduleTimeList
+          .querySelectorAll("[data-reschedule-time]")
+          .forEach((button) =>
+            button.addEventListener("click", () => {
+              state.rescheduleTime = button.dataset.rescheduleTime;
+              renderReschedule();
+            }),
+          );
+        rescheduleConfirm.disabled = !state.rescheduleTime;
+      }
+      function openReschedule(id) {
+        const appointment = getAppointments().find((item) => item.id === id);
+        if (!appointment) return;
+        state.reschedulingId = id;
+        state.rescheduleDate = Math.max(
+          0,
+          dates.findIndex(
+            (date) => date.toISOString().slice(0, 10) === appointment.date,
+          ),
+        );
+        state.rescheduleTime = appointment.time;
+        const doctor = doctors.find((item) => item.id === appointment.doctor);
+        rescheduleSummary.textContent = `${services[appointment.service]} · ${doctor?.name || "Врач"}`;
+        renderReschedule();
+        rescheduleModal.hidden = false;
+      }
+      function closeReschedule() {
+        rescheduleModal.hidden = true;
+        state.reschedulingId = null;
+        state.rescheduleTime = "";
+      }
       const screenMap = {
         home: "screen-home",
         services: "screen-services",
@@ -1281,22 +1482,7 @@
           : '<div class="empty-appointments">Здесь появятся ваши записи. Выберите услугу выше, чтобы создать первую.</div>';
         list.querySelectorAll("[data-reschedule]").forEach((button) =>
           button.addEventListener("click", () => {
-            const appointment = getAppointments().find(
-              (item) => item.id === button.dataset.reschedule,
-            );
-            if (!appointment) return;
-            state.service = appointment.service;
-            state.doctor = appointment.doctor;
-            state.date = Math.max(
-              0,
-              dates.findIndex(
-                (date) => date.toISOString().slice(0, 10) === appointment.date,
-              ),
-            );
-            state.time = appointment.time;
-            state.editingId = appointment.id;
-            renderBooking();
-            showScreen("booking");
+            openReschedule(button.dataset.reschedule);
           }),
         );
         list.querySelectorAll("[data-cancel]").forEach((button) =>
@@ -1333,6 +1519,28 @@
         state.time = "";
         renderBooking();
         showScreen("appointments");
+      });
+      document
+        .getElementById("reschedule-close")
+        .addEventListener("click", closeReschedule);
+      document
+        .getElementById("reschedule-cancel")
+        .addEventListener("click", closeReschedule);
+      rescheduleConfirm.addEventListener("click", () => {
+        if (!state.reschedulingId || !state.rescheduleTime) return;
+        saveAppointments(
+          getAppointments().map((appointment) =>
+            appointment.id === state.reschedulingId
+              ? {
+                  ...appointment,
+                  date: dates[state.rescheduleDate].toISOString().slice(0, 10),
+                  time: state.rescheduleTime,
+                }
+              : appointment,
+          ),
+        );
+        closeReschedule();
+        renderAppointments();
       });
       function updateClinicStatus() {
         const now = new Date();
