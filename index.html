@@ -1642,6 +1642,32 @@
         text-align: center;
         visibility: visible;
       }
+      .visual-card-copy {
+        position: absolute;
+        z-index: 5;
+        inset: 0;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 7px;
+        padding: 18px;
+        text-align: center;
+        pointer-events: none;
+      }
+      .visual-card-copy span,
+      .visual-card-copy small,
+      .visual-card--orange span,
+      .visual-card--orange small,
+      .visual-card--violet span,
+      .visual-card--violet small {
+        position: static;
+        inset: auto;
+        width: auto;
+        max-width: 100%;
+        margin: 0;
+        transform: none;
+        text-align: center;
+      }
       body,
       button,
       input,
@@ -1768,7 +1794,8 @@
               class="visual-card visual-card--blue"
               data-scroll="services"
             >
-              <span>УСЛУГИ</span><small>выбрать направление</small
+              <span class="visual-card-copy"
+                ><span>УСЛУГИ</span><small>выбрать направление</small></span
               ><img
                 src="assets/tooth-care.jpg"
                 alt="Стоматологическая процедура"
@@ -1777,7 +1804,9 @@
               class="visual-card visual-card--violet"
               data-scroll="booking"
             >
-              <span>ЗАПИСАТЬСЯ</span><small>выбрать своего врача</small
+              <span class="visual-card-copy"
+                ><span>ЗАПИСАТЬСЯ</span
+                ><small>выбрать своего врача</small></span
               ><img
                 src="assets/toothpaste.jpg"
                 alt="Средство для ухода за зубами"
@@ -1786,7 +1815,9 @@
               class="visual-card visual-card--orange"
               data-scroll="booking"
             >
-              <span>ВРАЧИ</span><small>специалисты Zub</small>
+              <span class="visual-card-copy"
+                ><span>ВРАЧИ</span><small>специалисты Zub</small></span
+              >
               <img
                 src="assets/dental-tools.jpg"
                 alt="Стоматологические инструменты"
