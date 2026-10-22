@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -888,6 +888,238 @@
           scroll-behavior: auto !important;
           transition: none !important;
         }
+      }
+
+      :root {
+        --bg: #0a0d0e;
+        --surface: #12191b;
+        --surface-blue: #102d39;
+        --surface-mint: #12392f;
+        --line: #2a393c;
+        --text: #f1eee7;
+        --muted: #8c9a9a;
+        --blue: #48c7ee;
+        --blue-dark: #159bc7;
+        --mint: #8fe3bf;
+      }
+      body {
+        background: var(--bg);
+        font-family: "DM Sans", system-ui, sans-serif;
+      }
+      body::before {
+        background:
+          radial-gradient(
+            circle at 85% 4%,
+            rgba(26, 114, 136, 0.18),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 10% 30%,
+            rgba(61, 117, 101, 0.1),
+            transparent 25%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(13, 25, 28, 0.36),
+            rgba(10, 13, 14, 0.92) 70%
+          );
+      }
+      .app {
+        max-width: 620px;
+        padding: 18px 22px 116px;
+      }
+      .topbar {
+        margin-bottom: 28px;
+        padding-bottom: 14px;
+        border-bottom-color: #34484b;
+      }
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border: 1px solid #396873;
+        border-radius: 12px;
+        background: #0d1719;
+      }
+      .brand-name {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 19px;
+        letter-spacing: -0.06em;
+      }
+      .brand-note {
+        letter-spacing: 0.12em;
+      }
+      .status {
+        border-left-color: var(--mint);
+        border-radius: 3px;
+        background: rgba(18, 57, 47, 0.55);
+        color: var(--mint);
+        letter-spacing: 0.01em;
+      }
+      .hero {
+        min-height: 348px;
+        padding: 32px 30px 30px;
+        border: 1px solid #365a62;
+        border-radius: 12px;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(21, 54, 63, 0.92),
+            rgba(15, 25, 27, 0.96) 72%
+          ),
+          var(--surface);
+      }
+      .eyebrow {
+        color: var(--blue);
+        font-size: 11px;
+        letter-spacing: 0.16em;
+      }
+      h1,
+      h2,
+      .visual-card span,
+      .reschedule-head h3 {
+        font-family: "Space Grotesk", sans-serif;
+      }
+      h1 {
+        max-width: 480px;
+        font-size: clamp(40px, 9vw, 68px);
+        letter-spacing: -0.09em;
+      }
+      .hero p {
+        max-width: 340px;
+        color: #b5c3c1;
+      }
+      .primary {
+        min-height: 50px;
+        border-radius: 6px;
+        background: var(--mint);
+        color: #082019;
+      }
+      .hero-art {
+        right: 26px;
+        bottom: 24px;
+        color: rgba(143, 227, 191, 0.8);
+      }
+      .visual-menu {
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .visual-card {
+        min-height: 162px;
+        padding: 20px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+      .visual-card::after {
+        width: 190px;
+        height: 190px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .visual-card--blue {
+        background: #155f8a;
+      }
+      .visual-card--violet {
+        min-height: 334px;
+        background: #5c477b;
+      }
+      .visual-card--orange {
+        background: #ae6336;
+      }
+      .visual-card span {
+        font-size: 25px;
+        letter-spacing: -0.08em;
+      }
+      .visual-card small {
+        color: rgba(255, 255, 255, 0.78);
+        letter-spacing: 0.02em;
+      }
+      .section {
+        margin-top: 26px;
+      }
+      .section-head {
+        align-items: baseline;
+        margin-bottom: 12px;
+      }
+      h2 {
+        font-size: 28px;
+        letter-spacing: -0.08em;
+      }
+      .section-head span {
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .services {
+        gap: 8px;
+      }
+      .service {
+        min-height: 148px;
+        padding: 15px;
+        border-radius: 10px;
+        background: rgba(18, 25, 27, 0.94);
+      }
+      .service-icon {
+        width: 36px;
+        height: 36px;
+        margin-bottom: 13px;
+        border-radius: 9px;
+      }
+      .service-title {
+        font-family: "Space Grotesk", sans-serif;
+        letter-spacing: -0.04em;
+      }
+      .service-price {
+        color: var(--mint);
+      }
+      .booking-panel,
+      .appointment,
+      .empty-appointments,
+      .info-card,
+      .faq,
+      .step {
+        border-radius: 10px;
+        background: rgba(18, 25, 27, 0.95);
+      }
+      .booking-panel {
+        padding: 18px;
+      }
+      .choice,
+      .date-choice,
+      .time-choice,
+      .appointment-actions button {
+        border-radius: 8px;
+        background: #0d1517;
+      }
+      .choice[aria-pressed="true"],
+      .date-choice[aria-pressed="true"] {
+        background: #123b4a;
+        color: var(--blue);
+      }
+      .doctor-info {
+        border-radius: 10px;
+        background: #12343f;
+      }
+      .booking-confirm,
+      .reschedule-actions button:last-child {
+        border-radius: 7px;
+        background: var(--blue-dark);
+      }
+      .reschedule-modal {
+        background: rgba(3, 8, 10, 0.84);
+      }
+      .reschedule-dialog {
+        border-radius: 12px;
+        background: #151f21;
+      }
+      nav {
+        border-top-color: #314246;
+        background: rgba(10, 13, 14, 0.96);
+      }
+      nav button {
+        font-size: 10px;
+        letter-spacing: -0.01em;
+      }
+      nav button[aria-current="page"] {
+        color: var(--blue);
       }
     </style>
   </head>
