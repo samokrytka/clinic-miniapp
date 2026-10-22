@@ -1228,6 +1228,67 @@
       .hero-art {
         color: rgba(34, 146, 166, 0.72);
       }
+      .hero-proof {
+        max-width: none;
+      }
+      .hero-art {
+        right: 14px;
+        bottom: 14px;
+        opacity: 0.58;
+      }
+      .visual-card img,
+      .visual-card img {
+        display: block;
+      }
+      .hero-art {
+        display: none;
+      }
+      .visual-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .visual-card span,
+      .visual-card small {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: auto;
+        max-width: 100%;
+        letter-spacing: 0.015em;
+        text-align: center;
+      }
+      .visual-card span {
+        z-index: 3;
+      }
+      .visual-card small {
+        z-index: 3;
+        margin-top: 7px;
+      }
+      .visual-card img {
+        z-index: 1;
+        width: 82%;
+        height: 82%;
+        right: -8px;
+        bottom: -22px;
+        object-fit: contain;
+        opacity: 0.34;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+      }
+      .visual-card--violet img {
+        width: 88%;
+        height: 80%;
+        right: -10px;
+        bottom: -28px;
+      }
+      .visual-card--orange img {
+        width: 100%;
+        height: 86%;
+        right: -20px;
+        bottom: -24px;
+      }
       .visual-card {
         border-color: rgba(255, 255, 255, 0.7);
         box-shadow: 0 10px 24px rgba(55, 117, 132, 0.12);
@@ -1269,6 +1330,23 @@
       .visual-card--orange span,
       .visual-card--orange small {
         color: #4b2b20;
+      }
+      .visual-card--orange span {
+        position: absolute;
+        top: 20px;
+        left: 14px;
+        width: calc(100% - 28px);
+      }
+      .visual-card--orange small {
+        position: absolute;
+        top: 55px;
+        left: 14px;
+        width: calc(100% - 28px);
+        margin-top: 0;
+      }
+      .visual-card--orange img {
+        bottom: -62px;
+        height: 124%;
       }
       .why-zub {
         display: grid;
@@ -1383,12 +1461,68 @@
         color: white;
       }
       .reschedule-modal {
+        z-index: 100;
         background: rgba(28, 77, 89, 0.22);
       }
       .reschedule-dialog {
         border: 1px solid #b7dce4;
         background: #ffffff;
         box-shadow: 0 22px 60px rgba(35, 92, 105, 0.2);
+      }
+      .reschedule-actions {
+        background: #ffffff;
+        border-top: 1px solid #e0eef1;
+        box-shadow: 0 -8px 16px rgba(35, 92, 105, 0.06);
+      }
+      .confirm-modal[hidden] {
+        display: none;
+      }
+      .confirm-modal {
+        position: fixed;
+        z-index: 120;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        background: rgba(28, 77, 89, 0.22);
+        backdrop-filter: blur(6px);
+      }
+      .confirm-dialog {
+        width: min(100%, 360px);
+        padding: 20px;
+        border: 1px solid #b7dce4;
+        border-radius: 16px;
+        background: #ffffff;
+        box-shadow: 0 22px 60px rgba(35, 92, 105, 0.2);
+      }
+      .confirm-dialog h3 {
+        margin: 0;
+        color: #17343d;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 20px;
+      }
+      .confirm-dialog p {
+        margin: 8px 0 18px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .confirm-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .confirm-actions button {
+        min-height: 44px;
+        border: 1px solid #c9e2e9;
+        border-radius: 9px;
+        background: #f5fbfc;
+        color: #52757d;
+        font-weight: 800;
+      }
+      .confirm-actions button:last-child {
+        border-color: #229bb8;
+        background: #229bb8;
+        color: #fff;
       }
       nav {
         border-top-color: #c6e0e7;
@@ -1400,6 +1534,117 @@
       }
       nav button[aria-current="page"] {
         color: #168db6;
+      }
+      .doctor-filters {
+        display: flex;
+        gap: 7px;
+        overflow-x: auto;
+        margin: -4px 0 12px;
+        padding-bottom: 3px;
+        scrollbar-width: none;
+      }
+      .doctor-filters::-webkit-scrollbar {
+        display: none;
+      }
+      .doctor-filter {
+        flex: 0 0 auto;
+        padding: 8px 11px;
+        border: 1px solid #c9e2e9;
+        border-radius: 999px;
+        background: #f5fbfc;
+        color: #6d858d;
+        font-size: 11px;
+        font-weight: 800;
+      }
+      .doctor-filter[aria-pressed="true"] {
+        border-color: #54b9d1;
+        background: #dff4f8;
+        color: #087b9f;
+      }
+      .appointment-actions {
+        position: relative;
+        z-index: 12;
+      }
+      .appointment-actions button {
+        position: relative;
+        z-index: 13;
+        pointer-events: auto;
+      }
+      .help-chat {
+        padding: 16px;
+        border: 1px solid #c9e2e9;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 8px 22px rgba(63, 126, 141, 0.08);
+      }
+      .help-chat-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .help-chat-head strong {
+        display: block;
+        color: #173b45;
+      }
+      .help-chat-head span {
+        display: block;
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .chat-avatar {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: #dff4f8;
+        color: #087b9f;
+        font-weight: 900;
+      }
+      .chat-messages {
+        display: grid;
+        gap: 7px;
+        max-height: 190px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+      }
+      .chat-message {
+        max-width: 88%;
+        padding: 9px 11px;
+        border-radius: 12px;
+        background: #e7f7fa;
+        color: #315963;
+        font-size: 12px;
+      }
+      .chat-message.is-user {
+        justify-self: end;
+        background: #dff4f8;
+        color: #176a82;
+      }
+      .chat-form {
+        display: flex;
+        gap: 7px;
+      }
+      .chat-form input {
+        min-width: 0;
+        flex: 1;
+        padding: 10px 11px;
+        border: 1px solid #c9e2e9;
+        border-radius: 9px;
+        background: #f8fdfe;
+        color: var(--text);
+        font: inherit;
+        font-size: 12px;
+      }
+      .chat-form button {
+        padding: 10px 12px;
+        border: 0;
+        border-radius: 9px;
+        background: #229bb8;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 800;
       }
     </style>
   </head>
@@ -1456,15 +1701,19 @@
               class="visual-card visual-card--blue"
               data-scroll="services"
             >
-              <span>УСЛУГИ</span><small>выбрать направление</small></button
+              <span>УСЛУГИ</span><small>выбрать направление</small
+              ><img
+                src="assets/tooth-care.jpg"
+                alt="Стоматологическая процедура"
+              /></button
             ><button
               class="visual-card visual-card--violet"
               data-scroll="booking"
             >
               <span>ЗАПИСАТЬСЯ</span><small>выбрать своего врача</small
               ><img
-                src="assets/vintage-mouth.jpg"
-                alt="Винтажная иллюстрация зубов"
+                src="assets/toothpaste.jpg"
+                alt="Средство для ухода за зубами"
               /></button
             ><button
               class="visual-card visual-card--orange"
@@ -1472,8 +1721,8 @@
             >
               <span>ВРАЧИ</span><small>специалисты Zub</small
               ><img
-                src="assets/vintage-child.png"
-                alt="Винтажная стоматологическая иллюстрация"
+                src="assets/dental-tools.jpg"
+                alt="Стоматологические инструменты"
               />
             </button>
           </div>
@@ -1527,7 +1776,8 @@
               <span class="service-icon"
                 ><svg class="icon" viewBox="0 0 24 24">
                   <path d="M5 7h14M5 12h14M5 17h14" />
-                  <circle cx="8" cy="7" r="1.5" /><circle cx="16" cy="17" r="1.5" /></svg></span
+                  <circle cx="8" cy="7" r="1.5" />
+                  <circle cx="16" cy="17" r="1.5" /></svg></span
               ><span class="service-title">Ортодонтия</span
               ><span class="service-note">прикус и брекеты</span
               ><span class="service-price">от 3 000 ₽</span>
@@ -1543,7 +1793,10 @@
             <button class="service" data-service="pediatric">
               <span class="service-icon"
                 ><svg class="icon" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="8.5" /><path d="M8 14c1.1 1.2 2.4 1.8 4 1.8s2.9-.6 4-1.8M9 9h.01M15 9h.01" /></svg></span
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path
+                    d="M8 14c1.1 1.2 2.4 1.8 4 1.8s2.9-.6 4-1.8M9 9h.01M15 9h.01"
+                  /></svg></span
               ><span class="service-title">Детская стоматология</span
               ><span class="service-note">бережная адаптация</span
               ><span class="service-price">от 1 500 ₽</span>
@@ -1551,7 +1804,12 @@
             <button class="service" data-service="whitening">
               <span class="service-icon"
                 ><svg class="icon" viewBox="0 0 24 24">
-                  <path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7Z" /><path d="m18 16 .7 2.3L21 19l-2.3.7L18 22l-.7-2.3L15 19l2.3-.7Z" /></svg></span
+                  <path
+                    d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7Z"
+                  />
+                  <path
+                    d="m18 16 .7 2.3L21 19l-2.3.7L18 22l-.7-2.3L15 19l2.3-.7Z"
+                  /></svg></span
               ><span class="service-title">Отбеливание</span
               ><span class="service-note">сияние улыбки</span
               ><span class="service-price">от 8 000 ₽</span>
@@ -1568,6 +1826,47 @@
           <div class="booking-panel">
             <span class="demo-badge">Пока пример интерфейса</span
             ><label class="booking-label">1. Врач</label>
+            <div
+              class="doctor-filters"
+              id="doctor-filters"
+              aria-label="Фильтр по специальности"
+            >
+              <button
+                class="doctor-filter"
+                data-category="all"
+                aria-pressed="true"
+              >
+                Все
+              </button>
+              <button
+                class="doctor-filter"
+                data-category="therapist"
+                aria-pressed="false"
+              >
+                Терапевты
+              </button>
+              <button
+                class="doctor-filter"
+                data-category="orthodontist"
+                aria-pressed="false"
+              >
+                Ортодонты
+              </button>
+              <button
+                class="doctor-filter"
+                data-category="surgeon"
+                aria-pressed="false"
+              >
+                Хирурги
+              </button>
+              <button
+                class="doctor-filter"
+                data-category="pediatric"
+                aria-pressed="false"
+              >
+                Детские
+              </button>
+            </div>
             <div class="choice-grid" id="doctor-list"></div>
             <div id="doctor-info"></div>
             <label class="booking-label">2. День</label>
@@ -1633,6 +1932,35 @@
             >
           </div>
         </section>
+        <section class="section">
+          <div class="section-head">
+            <h2>Написать нам</h2>
+            <span>ответим в рабочее время</span>
+          </div>
+          <div class="help-chat">
+            <div class="help-chat-head">
+              <span class="chat-avatar">Z</span>
+              <div>
+                <strong>Администратор ZUB</strong
+                ><span>Обычно отвечаем в течение 10 минут</span>
+              </div>
+            </div>
+            <div class="chat-messages" id="chat-messages" aria-live="polite">
+              <div class="chat-message">
+                Здравствуйте! Поможем выбрать услугу, врача или время приёма.
+              </div>
+            </div>
+            <form class="chat-form" id="chat-form">
+              <input
+                id="chat-input"
+                type="text"
+                placeholder="Напишите вопрос"
+                autocomplete="off"
+              />
+              <button type="submit">Отправить</button>
+            </form>
+          </div>
+        </section>
         <section class="section" id="help">
           <div class="section-head"><h2>Частые вопросы</h2></div>
           <div class="faq">
@@ -1691,6 +2019,21 @@
         </div>
       </div>
     </div>
+    <div class="confirm-modal" id="confirm-modal" hidden>
+      <div
+        class="confirm-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirm-title"
+      >
+        <h3 id="confirm-title">Подтвердите действие</h3>
+        <p id="confirm-message"></p>
+        <div class="confirm-actions">
+          <button id="confirm-no" type="button">Оставить</button>
+          <button id="confirm-yes" type="button">Подтвердить</button>
+        </div>
+      </div>
+    </div>
     <nav>
       <div class="nav-inner">
         <button data-target="home" aria-current="page">
@@ -1746,47 +2089,123 @@
           id: "anna",
           name: "Анна Петрова",
           specialty: "терапевт",
+          category: "therapist",
           note: "8 лет опыта",
           education:
             "МГМСУ им. А. И. Евдокимова, стоматологический факультет. Повышение квалификации по эстетической реставрации.",
           review:
             "«Всё объяснила без сложных слов, приём прошёл очень спокойно».",
+          reviews: [
+            "«Всё объяснила без сложных слов, приём прошёл очень спокойно».",
+            "«Понравилось, что врач предложила несколько вариантов лечения».",
+            "«Очень бережно провела лечение, теперь не боюсь возвращаться».",
+          ],
         },
         {
           id: "maxim",
           name: "Максим Орлов",
           specialty: "ортодонт",
+          category: "orthodontist",
           note: "10 лет опыта",
           education:
             "Первый МГМУ им. И. М. Сеченова. Ординатура по ортодонтии, работа с элайнерами и брекет-системами.",
           review: "«Наконец-то поняла, какой план лечения мне подходит».",
+          reviews: [
+            "«Наконец-то поняла, какой план лечения мне подходит».",
+            "«На консультации разобрали все этапы и сроки».",
+          ],
         },
         {
           id: "elena",
           name: "Елена Смирнова",
           specialty: "терапевт",
+          category: "therapist",
           note: "6 лет опыта",
           education:
             "РНИМУ им. Н. И. Пирогова. Специализация по лечению кариеса и работе с микроскопом.",
           review: "«Очень внимательный врач, ничего не навязывает».",
+          reviews: ["«Очень внимательный врач, ничего не навязывает»."],
         },
         {
           id: "kirill",
           name: "Кирилл Волков",
           specialty: "хирург-имплантолог",
+          category: "surgeon",
           note: "12 лет опыта",
           education:
             "СПбГУ, челюстно-лицевая хирургия. Имплантация и сложные удаления.",
           review: "«Операция прошла быстрее и легче, чем я ожидала».",
+          reviews: [
+            "«Операция прошла быстрее и легче, чем я ожидала».",
+            "«Получила подробные рекомендации и поддержку после процедуры».",
+            "«Врач подробно ответил на все вопросы до и после удаления».",
+          ],
         },
         {
           id: "sofia",
           name: "Софья Белова",
           specialty: "детский стоматолог",
+          category: "pediatric",
           note: "7 лет опыта",
           education:
             "Казанский ГМУ. Детская стоматология и мягкая адаптация маленьких пациентов.",
           review: "«Ребёнок впервые вышел от стоматолога без слёз».",
+          reviews: [
+            "«Ребёнок впервые вышел от стоматолога без слёз».",
+            "«Доктор всё объясняла ребёнку спокойно и понятно».",
+          ],
+        },
+        {
+          id: "irina",
+          name: "Ирина Власова",
+          specialty: "терапевт",
+          category: "therapist",
+          note: "9 лет опыта",
+          education:
+            "МГМСУ им. А. И. Евдокимова. Эстетическая реставрация и лечение под микроскопом.",
+          reviews: [
+            "«Очень аккуратная работа и подробные объяснения».",
+            "«Пришла на консультацию, получила понятный план лечения».",
+            "«Результат реставрации выглядит естественно».",
+            "«На каждом этапе было спокойно и понятно».",
+          ],
+        },
+        {
+          id: "dmitry",
+          name: "Дмитрий Соколов",
+          specialty: "ортодонт",
+          category: "orthodontist",
+          note: "11 лет опыта",
+          education:
+            "РНИМУ им. Н. И. Пирогова. Брекет-системы и лечение на элайнерах.",
+          reviews: [
+            "«Внимательно разобрал снимки и предложил несколько вариантов».",
+            "«Результат заметен уже через несколько месяцев».",
+          ],
+        },
+        {
+          id: "natalia",
+          name: "Наталья Романова",
+          specialty: "стоматолог-хирург",
+          category: "surgeon",
+          note: "14 лет опыта",
+          education:
+            "Первый МГМУ им. И. М. Сеченова. Удаление зубов и хирургическая подготовка к имплантации.",
+          reviews: [
+            "«Всё прошло спокойно, врач постоянно была на связи».",
+            "«Очень бережное отношение и чёткие рекомендации».",
+            "«После процедуры быстро ответили на мой вопрос».",
+          ],
+        },
+        {
+          id: "olga",
+          name: "Ольга Крылова",
+          specialty: "детский стоматолог",
+          category: "pediatric",
+          note: "8 лет опыта",
+          education:
+            "Казанский ГМУ. Детская терапия и адаптация детей к лечению.",
+          reviews: ["«Сын сам спросил, когда можно прийти ещё раз»."],
         },
       ];
       const services = {
@@ -1801,6 +2220,7 @@
       const state = {
         service: "consult",
         doctor: "any",
+        doctorCategory: "all",
         date: 0,
         time: "",
         editingId: null,
@@ -1823,6 +2243,11 @@
         "reschedule-time-list",
       );
       const rescheduleConfirm = document.getElementById("reschedule-confirm");
+      const confirmModal = document.getElementById("confirm-modal");
+      const confirmMessage = document.getElementById("confirm-message");
+      const confirmYes = document.getElementById("confirm-yes");
+      const confirmNo = document.getElementById("confirm-no");
+      let pendingConfirmation = null;
       const dateFormatter = new Intl.DateTimeFormat("ru-RU", {
         weekday: "short",
         day: "numeric",
@@ -1852,7 +2277,22 @@
         renderBooking();
       };
       function renderBooking() {
-        doctorList.innerHTML = doctors
+        const visibleDoctors =
+          state.doctorCategory === "all"
+            ? doctors
+            : doctors.filter(
+                (doctor) => doctor.category === state.doctorCategory,
+              );
+        if (!visibleDoctors.some((doctor) => doctor.id === state.doctor)) {
+          state.doctor = visibleDoctors[0]?.id || "any";
+        }
+        document.querySelectorAll(".doctor-filter").forEach((button) => {
+          button.setAttribute(
+            "aria-pressed",
+            String(button.dataset.category === state.doctorCategory),
+          );
+        });
+        doctorList.innerHTML = visibleDoctors
           .map(
             (doctor) =>
               `<button class="choice" aria-pressed="${state.doctor === doctor.id}" data-doctor="${doctor.id}">${doctor.name}<em>${doctor.specialty}</em><small>${doctor.note}</small></button>`,
@@ -1860,7 +2300,12 @@
           .join("");
         const selectedDoctor =
           doctors.find((doctor) => doctor.id === state.doctor) || doctors[0];
-        doctorInfo.innerHTML = `<div class="doctor-info"><strong>${selectedDoctor.name} · ${selectedDoctor.specialty}</strong><p>${selectedDoctor.note}</p><details><summary>Образование и отзывы</summary><p><b>Образование:</b> ${selectedDoctor.education}</p><p><b>Отзыв:</b> ${selectedDoctor.review}</p></details></div>`;
+        const reviews = selectedDoctor.reviews || [selectedDoctor.review];
+        const reviewsMarkup = reviews
+          .filter(Boolean)
+          .map((review) => `<p><b>Отзыв:</b> ${review}</p>`)
+          .join("");
+        doctorInfo.innerHTML = `<div class="doctor-info"><strong>${selectedDoctor.name} · ${selectedDoctor.specialty}</strong><p>${selectedDoctor.note}</p><details><summary>Образование и отзывы (${reviews.length})</summary><p><b>Образование:</b> ${selectedDoctor.education}</p>${reviewsMarkup}</details></div>`;
         dateList.innerHTML = dates
           .map((date, index) => {
             const parts = dateFormatter.formatToParts(date);
@@ -1883,6 +2328,12 @@
               select("doctor", button.dataset.doctor),
             ),
           );
+        document.querySelectorAll(".doctor-filter").forEach((button) =>
+          button.addEventListener("click", () => {
+            state.doctorCategory = button.dataset.category;
+            renderBooking();
+          }),
+        );
         dateList
           .querySelectorAll("[data-date]")
           .forEach((button) =>
@@ -1941,7 +2392,9 @@
         rescheduleConfirm.disabled = !state.rescheduleTime;
       }
       function openReschedule(id) {
-        const appointment = getAppointments().find((item) => item.id === id);
+        const appointment = getAppointments().find(
+          (item) => String(item.id) === String(id),
+        );
         if (!appointment) return;
         state.reschedulingId = id;
         state.rescheduleDate = Math.max(
@@ -2018,14 +2471,20 @@
         );
       }
       function askConfirmation(message, onConfirm) {
-        if (tg?.showConfirm) {
-          tg.showConfirm(message, (confirmed) => {
-            if (confirmed) onConfirm();
-          });
-          return;
-        }
-        if (window.confirm(message)) onConfirm();
+        pendingConfirmation = onConfirm;
+        confirmMessage.textContent = message;
+        confirmModal.hidden = false;
       }
+      function closeConfirmation() {
+        confirmModal.hidden = true;
+        pendingConfirmation = null;
+      }
+      confirmNo.addEventListener("click", closeConfirmation);
+      confirmYes.addEventListener("click", () => {
+        const action = pendingConfirmation;
+        closeConfirmation();
+        if (action) action();
+      });
       function displayDate(date) {
         return new Intl.DateTimeFormat("ru-RU", {
           weekday: "long",
@@ -2046,27 +2505,52 @@
               })
               .join("")
           : '<div class="empty-appointments">Здесь появятся ваши записи. Выберите услугу выше, чтобы создать первую.</div>';
-        list.querySelectorAll("[data-reschedule]").forEach((button) =>
-          button.addEventListener("click", () => {
-            openReschedule(button.dataset.reschedule);
-          }),
-        );
-        list.querySelectorAll("[data-cancel]").forEach((button) =>
-          button.addEventListener("click", () => {
+        list.onclick = (event) => {
+          const rescheduleButton = event.target.closest("[data-reschedule]");
+          const cancelButton = event.target.closest("[data-cancel]");
+          if (rescheduleButton) {
+            event.preventDefault();
+            event.stopPropagation();
+            openReschedule(rescheduleButton.dataset.reschedule);
+            return;
+          }
+          if (cancelButton) {
+            event.preventDefault();
+            event.stopPropagation();
+            const appointmentId = cancelButton.dataset.cancel;
             askConfirmation(
               "Вы уверены, что хотите отменить эту запись?",
               () => {
                 saveAppointments(
                   getAppointments().filter(
-                    (item) => item.id !== button.dataset.cancel,
+                    (item) => String(item.id) !== String(appointmentId),
                   ),
                 );
                 renderAppointments();
               },
             );
-          }),
-        );
+          }
+        };
       }
+      const chatForm = document.getElementById("chat-form");
+      const chatInput = document.getElementById("chat-input");
+      const chatMessages = document.getElementById("chat-messages");
+      chatForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const message = chatInput.value.trim();
+        if (!message) return;
+        chatMessages.insertAdjacentHTML(
+          "beforeend",
+          `<div class="chat-message is-user"></div>`,
+        );
+        chatMessages.lastElementChild.textContent = message;
+        chatInput.value = "";
+        chatMessages.insertAdjacentHTML(
+          "beforeend",
+          `<div class="chat-message">Спасибо! Администратор ответит в рабочее время. Пока можно выбрать услугу и свободное время в разделе «Запись».</div>`,
+        );
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      });
       confirm.addEventListener("click", () => {
         if (!state.time) return;
         const appointments = getAppointments();
