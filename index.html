@@ -1463,6 +1463,15 @@
           JSON.stringify(appointments),
         );
       }
+      function askConfirmation(message, onConfirm) {
+        if (tg?.showConfirm) {
+          tg.showConfirm(message, (confirmed) => {
+            if (confirmed) onConfirm();
+          });
+          return;
+        }
+        if (window.confirm(message)) onConfirm();
+      }
       function displayDate(date) {
         return new Intl.DateTimeFormat("ru-RU", {
           weekday: "long",
@@ -1490,12 +1499,17 @@
         );
         list.querySelectorAll("[data-cancel]").forEach((button) =>
           button.addEventListener("click", () => {
-            saveAppointments(
-              getAppointments().filter(
-                (item) => item.id !== button.dataset.cancel,
-              ),
+            askConfirmation(
+              "Вы уверены, что хотите отменить эту запись?",
+              () => {
+                saveAppointments(
+                  getAppointments().filter(
+                    (item) => item.id !== button.dataset.cancel,
+                  ),
+                );
+                renderAppointments();
+              },
             );
-            renderAppointments();
           }),
         );
       }
@@ -1531,19 +1545,23 @@
         .addEventListener("click", closeReschedule);
       rescheduleConfirm.addEventListener("click", () => {
         if (!state.reschedulingId || !state.rescheduleTime) return;
-        saveAppointments(
-          getAppointments().map((appointment) =>
-            appointment.id === state.reschedulingId
-              ? {
-                  ...appointment,
-                  date: dates[state.rescheduleDate].toISOString().slice(0, 10),
-                  time: state.rescheduleTime,
-                }
-              : appointment,
-          ),
-        );
-        closeReschedule();
-        renderAppointments();
+        askConfirmation("Сохранить новую дату и время визита?", () => {
+          saveAppointments(
+            getAppointments().map((appointment) =>
+              appointment.id === state.reschedulingId
+                ? {
+                    ...appointment,
+                    date: dates[state.rescheduleDate]
+                      .toISOString()
+                      .slice(0, 10),
+                    time: state.rescheduleTime,
+                  }
+                : appointment,
+            ),
+          );
+          closeReschedule();
+          renderAppointments();
+        });
       });
       function updateClinicStatus() {
         const now = new Date();
