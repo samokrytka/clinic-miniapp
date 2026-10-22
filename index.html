@@ -1270,6 +1270,76 @@
       .visual-card--orange small {
         color: #4b2b20;
       }
+      .why-zub {
+        display: grid;
+        gap: 10px;
+        margin-top: 22px;
+        padding: 20px;
+        border: 1px solid #c9e2e9;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 8px 22px rgba(63, 126, 141, 0.08);
+      }
+      .why-zub h2 {
+        font-size: 25px;
+      }
+      .why-zub-intro {
+        margin: 0 0 3px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .why-zub-item {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        gap: 10px;
+        align-items: start;
+        padding-top: 11px;
+        border-top: 1px solid #d8ebef;
+      }
+      .why-zub-item b {
+        display: block;
+        color: #173b45;
+        font-size: 14px;
+      }
+      .why-zub-item p {
+        margin: 3px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .why-zub-icon {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #dff4f8;
+        color: var(--blue-dark);
+        font-weight: 800;
+      }
+      .hero-proof {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px 14px;
+        margin-top: 18px;
+        color: #52757d;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .hero-proof span::before {
+        content: "✓";
+        margin-right: 5px;
+        color: #168db6;
+        font-weight: 900;
+      }
+      .hero-compact {
+        min-height: 282px;
+        padding-top: 26px;
+        padding-bottom: 24px;
+      }
+      .hero-compact h1 {
+        max-width: 410px;
+        font-size: clamp(32px, 7.6vw, 54px);
+        letter-spacing: -0.075em;
+      }
       .service,
       .booking-panel,
       .appointment,
@@ -1356,13 +1426,18 @@
       </header>
       <div class="screen is-active" id="screen-home">
         <section id="home">
-          <div class="hero">
+          <div class="hero hero-compact">
             <p class="eyebrow">ZUB / DENTAL CLUB</p>
-            <h1>Зубы — это тоже характер</h1>
+            <h1>Здоровая улыбка начинается здесь</h1>
             <p>
-              Запись, врачи и расписание в одном месте. Без звонков и лишних
-              сообщений.
+              Услуги, врачи и расписание в одном месте. Выберите подходящую
+              помощь и запишитесь без звонков.
             </p>
+            <div class="hero-proof" aria-label="Преимущества клиники">
+              <span>Профильные врачи</span>
+              <span>Понятные услуги</span>
+              <span>Онлайн-запись</span>
+            </div>
             <button class="primary" data-action="book">
               Записаться
               <svg class="icon" viewBox="0 0 24 24">
@@ -1379,9 +1454,9 @@
           <div class="visual-menu">
             <button
               class="visual-card visual-card--blue"
-              data-scroll="appointments"
+              data-scroll="services"
             >
-              <span>ПРИЁМЫ</span><small>ваша история визитов</small></button
+              <span>УСЛУГИ</span><small>выбрать направление</small></button
             ><button
               class="visual-card visual-card--violet"
               data-scroll="booking"
@@ -1447,6 +1522,39 @@
               ><span class="service-title">Другой вопрос</span
               ><span class="service-note">подберём лечение</span
               ><span class="service-price">через консультацию</span>
+            </button>
+            <button class="service" data-service="orthodontics">
+              <span class="service-icon"
+                ><svg class="icon" viewBox="0 0 24 24">
+                  <path d="M5 7h14M5 12h14M5 17h14" />
+                  <circle cx="8" cy="7" r="1.5" /><circle cx="16" cy="17" r="1.5" /></svg></span
+              ><span class="service-title">Ортодонтия</span
+              ><span class="service-note">прикус и брекеты</span
+              ><span class="service-price">от 3 000 ₽</span>
+            </button>
+            <button class="service" data-service="implantation">
+              <span class="service-icon"
+                ><svg class="icon" viewBox="0 0 24 24">
+                  <path d="M7 4v16M17 4v16M5 8h14M5 16h14" /></svg></span
+              ><span class="service-title">Имплантация</span
+              ><span class="service-note">план лечения</span
+              ><span class="service-price">от 20 000 ₽</span>
+            </button>
+            <button class="service" data-service="pediatric">
+              <span class="service-icon"
+                ><svg class="icon" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="8.5" /><path d="M8 14c1.1 1.2 2.4 1.8 4 1.8s2.9-.6 4-1.8M9 9h.01M15 9h.01" /></svg></span
+              ><span class="service-title">Детская стоматология</span
+              ><span class="service-note">бережная адаптация</span
+              ><span class="service-price">от 1 500 ₽</span>
+            </button>
+            <button class="service" data-service="whitening">
+              <span class="service-icon"
+                ><svg class="icon" viewBox="0 0 24 24">
+                  <path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7Z" /><path d="m18 16 .7 2.3L21 19l-2.3.7L18 22l-.7-2.3L15 19l2.3-.7Z" /></svg></span
+              ><span class="service-title">Отбеливание</span
+              ><span class="service-note">сияние улыбки</span
+              ><span class="service-price">от 8 000 ₽</span>
             </button>
           </div>
         </section>
@@ -1621,8 +1729,8 @@
         if (tg) {
           tg.ready();
           tg.expand();
-          tg.setHeaderColor("#0b1113");
-          tg.setBackgroundColor("#0b1113");
+          tg.setHeaderColor("#f4fbfd");
+          tg.setBackgroundColor("#f4fbfd");
         }
       } catch {}
       const doctors = [
@@ -1685,6 +1793,10 @@
         consult: "Консультация",
         clean: "Профессиональная чистка",
         caries: "Лечение кариеса",
+        orthodontics: "Ортодонтия",
+        implantation: "Имплантация",
+        pediatric: "Детская стоматология",
+        whitening: "Отбеливание",
       };
       const state = {
         service: "consult",
