@@ -40,8 +40,7 @@
         position: relative;
         min-height: 100vh;
         margin: 0;
-        background: #0b1113 url("assets/smile-closeup.png") center top /
-          min(100vw, 1152px) auto fixed no-repeat;
+        background: #0b1113;
         color: var(--text);
         font:
           16px/1.45 "Manrope",
@@ -77,6 +76,23 @@
         max-width: 560px;
         margin: 0 auto;
         padding: 22px 20px 112px;
+      }
+      .screen {
+        display: none;
+      }
+      .screen.is-active {
+        display: block;
+        animation: screen-in 0.2s ease-out;
+      }
+      @keyframes screen-in {
+        from {
+          opacity: 0;
+          transform: translateY(5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       .topbar {
         display: flex;
@@ -789,191 +805,204 @@
           ><i></i><span>Проверяем график…</span></span
         >
       </header>
-      <section id="home">
-        <div class="hero">
-          <p class="eyebrow">ZUB / DENTAL CLUB</p>
-          <h1>Зубы — это тоже характер</h1>
-          <p>
-            Запись, врачи и расписание в одном месте. Без звонков и лишних
-            сообщений.
-          </p>
-          <button class="primary" data-action="book">
-            Записаться
-            <svg class="icon" viewBox="0 0 24 24">
-              <path d="M5 12h13M13 6l6 6-6 6" />
-            </svg></button
-          ><span class="hero-art" aria-hidden="true"
-            ><svg class="icon" viewBox="0 0 24 24">
-              <path
-                d="M7.8 4.8c1.5-1.4 2.5.2 4.2.2s2.7-1.6 4.2-.2c2.5 2.2 2.2 5.4 1.5 8.1-.7 2.7-1.6 6.1-3.2 6.1-1.5 0-1.1-3.4-2.5-3.4s-1 3.4-2.5 3.4c-1.6 0-2.5-3.4-3.2-6.1-.7-2.7-1-5.9 1.5-8.1Z"
-              />
-              <path d="M9.2 3.8C9.6 2.7 10.5 2 12 2s2.4.7 2.8 1.8" /></svg
-          ></span>
-        </div>
-        <div class="visual-menu">
-          <button
-            class="visual-card visual-card--blue"
-            data-scroll="appointments"
-          >
-            <span>ПРИЁМЫ</span><small>ваша история визитов</small></button
-          ><button
-            class="visual-card visual-card--violet"
-            data-scroll="booking"
-          >
-            <span>ЗАПИСАТЬСЯ</span><small>выбрать своего врача</small
-            ><img
-              src="assets/vintage-mouth.jpg"
-              alt="Винтажная иллюстрация зубов"
-            /></button
-          ><button
-            class="visual-card visual-card--orange"
-            data-scroll="booking"
-          >
-            <span>ВРАЧИ</span><small>специалисты Zub</small
-            ><img
-              src="assets/vintage-child.png"
-              alt="Винтажная стоматологическая иллюстрация"
-            />
-          </button>
-        </div>
-      </section>
-      <section class="section" id="services">
-        <div class="section-head">
-          <h2>Выберите заботу</h2>
-          <span>пн–сб · 10:00–19:00</span>
-        </div>
-        <div class="services">
-          <button class="service" data-service="consult">
-            <span class="service-icon"
-              ><svg class="icon" viewBox="0 0 24 24">
-                <path d="M12 3v18M3 12h18" />
-                <circle cx="12" cy="12" r="8.5" /></svg></span
-            ><span class="service-title">Консультация</span
-            ><span class="service-note">первичный осмотр</span
-            ><span class="service-price">от 1 000 ₽</span>
-          </button>
-          <button class="service" data-service="clean">
-            <span class="service-icon"
-              ><svg class="icon" viewBox="0 0 24 24">
-                <path d="m5 14 2-8 3 5 2-7 2 7 3-5 2 8" />
-                <path d="M5 14c0 4 3.1 7 7 7s7-3 7-7" /></svg></span
-            ><span class="service-title">Чистка</span
-            ><span class="service-note">свежесть и блеск</span
-            ><span class="service-price">от 4 500 ₽</span>
-          </button>
-          <button class="service" data-service="caries">
-            <span class="service-icon"
+      <div class="screen is-active" id="screen-home">
+        <section id="home">
+          <div class="hero">
+            <p class="eyebrow">ZUB / DENTAL CLUB</p>
+            <h1>Зубы — это тоже характер</h1>
+            <p>
+              Запись, врачи и расписание в одном месте. Без звонков и лишних
+              сообщений.
+            </p>
+            <button class="primary" data-action="book">
+              Записаться
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M5 12h13M13 6l6 6-6 6" />
+              </svg></button
+            ><span class="hero-art" aria-hidden="true"
               ><svg class="icon" viewBox="0 0 24 24">
                 <path
                   d="M7.8 4.8c1.5-1.4 2.5.2 4.2.2s2.7-1.6 4.2-.2c2.5 2.2 2.2 5.4 1.5 8.1-.7 2.7-1.6 6.1-3.2 6.1-1.5 0-1.1-3.4-2.5-3.4s-1 3.4-2.5 3.4c-1.6 0-2.5-3.4-3.2-6.1-.7-2.7-1-5.9 1.5-8.1Z"
-                /></svg></span
-            ><span class="service-title">Лечение</span
-            ><span class="service-note">бережно и спокойно</span
-            ><span class="service-price">от 6 000 ₽</span>
-          </button>
-          <button class="service" data-service="consult">
-            <span class="service-icon"
+                />
+                <path d="M9.2 3.8C9.6 2.7 10.5 2 12 2s2.4.7 2.8 1.8" /></svg
+            ></span>
+          </div>
+          <div class="visual-menu">
+            <button
+              class="visual-card visual-card--blue"
+              data-scroll="appointments"
+            >
+              <span>ПРИЁМЫ</span><small>ваша история визитов</small></button
+            ><button
+              class="visual-card visual-card--violet"
+              data-scroll="booking"
+            >
+              <span>ЗАПИСАТЬСЯ</span><small>выбрать своего врача</small
+              ><img
+                src="assets/vintage-mouth.jpg"
+                alt="Винтажная иллюстрация зубов"
+              /></button
+            ><button
+              class="visual-card visual-card--orange"
+              data-scroll="booking"
+            >
+              <span>ВРАЧИ</span><small>специалисты Zub</small
+              ><img
+                src="assets/vintage-child.png"
+                alt="Винтажная стоматологическая иллюстрация"
+              />
+            </button>
+          </div>
+        </section>
+      </div>
+      <div class="screen" id="screen-services">
+        <section class="section" id="services">
+          <div class="section-head">
+            <h2>Выберите заботу</h2>
+            <span>пн–сб · 10:00–19:00</span>
+          </div>
+          <div class="services">
+            <button class="service" data-service="consult">
+              <span class="service-icon"
+                ><svg class="icon" viewBox="0 0 24 24">
+                  <path d="M12 3v18M3 12h18" />
+                  <circle cx="12" cy="12" r="8.5" /></svg></span
+              ><span class="service-title">Консультация</span
+              ><span class="service-note">первичный осмотр</span
+              ><span class="service-price">от 1 000 ₽</span>
+            </button>
+            <button class="service" data-service="clean">
+              <span class="service-icon"
+                ><svg class="icon" viewBox="0 0 24 24">
+                  <path d="m5 14 2-8 3 5 2-7 2 7 3-5 2 8" />
+                  <path d="M5 14c0 4 3.1 7 7 7s7-3 7-7" /></svg></span
+              ><span class="service-title">Чистка</span
+              ><span class="service-note">свежесть и блеск</span
+              ><span class="service-price">от 4 500 ₽</span>
+            </button>
+            <button class="service" data-service="caries">
+              <span class="service-icon"
+                ><svg class="icon" viewBox="0 0 24 24">
+                  <path
+                    d="M7.8 4.8c1.5-1.4 2.5.2 4.2.2s2.7-1.6 4.2-.2c2.5 2.2 2.2 5.4 1.5 8.1-.7 2.7-1.6 6.1-3.2 6.1-1.5 0-1.1-3.4-2.5-3.4s-1 3.4-2.5 3.4c-1.6 0-2.5-3.4-3.2-6.1-.7-2.7-1-5.9 1.5-8.1Z"
+                  /></svg></span
+              ><span class="service-title">Лечение</span
+              ><span class="service-note">бережно и спокойно</span
+              ><span class="service-price">от 6 000 ₽</span>
+            </button>
+            <button class="service" data-service="consult">
+              <span class="service-icon"
+                ><svg class="icon" viewBox="0 0 24 24">
+                  <path d="M4 12h16M12 4v16" />
+                  <circle cx="12" cy="12" r="8.5" /></svg></span
+              ><span class="service-title">Другой вопрос</span
+              ><span class="service-note">подберём лечение</span
+              ><span class="service-price">через консультацию</span>
+            </button>
+          </div>
+        </section>
+      </div>
+      <div class="screen" id="screen-booking">
+        <section class="section" id="booking">
+          <div class="section-head">
+            <h2>Запись онлайн</h2>
+            <span>демо-режим</span>
+          </div>
+          <div class="booking-panel">
+            <span class="demo-badge">Пока пример интерфейса</span
+            ><label class="booking-label">1. Врач</label>
+            <div class="choice-grid" id="doctor-list"></div>
+            <div id="doctor-info"></div>
+            <label class="booking-label">2. День</label>
+            <div class="date-grid" id="date-list"></div>
+            <label class="booking-label">3. Время</label>
+            <div class="time-grid" id="time-list"></div>
+            <p class="booking-note" id="booking-note">
+              Выберите врача и время приёма.
+            </p>
+            <button class="booking-confirm" id="confirm-booking" disabled>
+              Подтвердить запись
+            </button>
+          </div>
+        </section>
+      </div>
+      <div class="screen" id="screen-appointments">
+        <section class="section" id="appointments">
+          <div class="section-head">
+            <h2>Мои записи</h2>
+            <span>можно перенести</span>
+          </div>
+          <div class="appointment-list" id="appointment-list"></div>
+        </section>
+      </div>
+      <div class="screen" id="screen-help">
+        <section class="section" id="how">
+          <div class="section-head"><h2>Как всё проходит</h2></div>
+          <div class="steps">
+            <div class="step">
+              <b class="step-number">01</b
+              ><span
+                ><strong>Выберите услугу</strong
+                ><span>Расскажем, что подойдёт именно вам</span></span
+              >
+            </div>
+            <div class="step">
+              <b class="step-number">02</b
+              ><span
+                ><strong>Найдите удобное окно</strong
+                ><span>Покажем только свободные слоты</span></span
+              >
+            </div>
+            <div class="step">
+              <b class="step-number">03</b
+              ><span
+                ><strong>Получите напоминание</strong
+                ><span>За день и за два часа до визита</span></span
+              >
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="info-card">
+            <span class="info-icon"
               ><svg class="icon" viewBox="0 0 24 24">
-                <path d="M4 12h16M12 4v16" />
-                <circle cx="12" cy="12" r="8.5" /></svg></span
-            ><span class="service-title">Другой вопрос</span
-            ><span class="service-note">подберём лечение</span
-            ><span class="service-price">через консультацию</span>
-          </button>
-        </div>
-      </section>
-      <section class="section" id="booking">
-        <div class="section-head">
-          <h2>Запись онлайн</h2>
-          <span>демо-режим</span>
-        </div>
-        <div class="booking-panel">
-          <span class="demo-badge">Пока пример интерфейса</span
-          ><label class="booking-label">1. Врач</label>
-          <div class="choice-grid" id="doctor-list"></div>
-          <div id="doctor-info"></div>
-          <label class="booking-label">2. День</label>
-          <div class="date-grid" id="date-list"></div>
-          <label class="booking-label">3. Время</label>
-          <div class="time-grid" id="time-list"></div>
-          <p class="booking-note" id="booking-note">
-            Выберите врача и время приёма.
-          </p>
-          <button class="booking-confirm" id="confirm-booking" disabled>
-            Подтвердить запись
-          </button>
-        </div>
-      </section>
-      <section class="section" id="appointments">
-        <div class="section-head">
-          <h2>Мои записи</h2>
-          <span>можно перенести</span>
-        </div>
-        <div class="appointment-list" id="appointment-list"></div>
-      </section>
-      <section class="section" id="how">
-        <div class="section-head"><h2>Как всё проходит</h2></div>
-        <div class="steps">
-          <div class="step">
-            <b class="step-number">01</b
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 2" /></svg></span
             ><span
-              ><strong>Выберите услугу</strong
-              ><span>Расскажем, что подойдёт именно вам</span></span
+              ><strong>Мы рядом с вами</strong
+              ><span
+                >Москва · работаем каждый день кроме воскресенья</span
+              ></span
             >
           </div>
-          <div class="step">
-            <b class="step-number">02</b
-            ><span
-              ><strong>Найдите удобное окно</strong
-              ><span>Покажем только свободные слоты</span></span
-            >
+        </section>
+        <section class="section" id="help">
+          <div class="section-head"><h2>Частые вопросы</h2></div>
+          <div class="faq">
+            <details>
+              <summary>Можно ли отменить запись?</summary>
+              <p>
+                Да, откройте раздел «Мои записи» прямо здесь и нажмите кнопку
+                отмены.
+              </p>
+            </details>
+            <details>
+              <summary>Как перенести визит?</summary>
+              <p>
+                Откройте «Мои записи», нажмите «Перенести» и выберите новое
+                время.
+              </p>
+            </details>
+            <details>
+              <summary>Что взять с собой?</summary>
+              <p>
+                Только хорошее настроение. Мы бережно проведём консультацию и
+                всё объясним.
+              </p>
+            </details>
           </div>
-          <div class="step">
-            <b class="step-number">03</b
-            ><span
-              ><strong>Получите напоминание</strong
-              ><span>За день и за два часа до визита</span></span
-            >
-          </div>
-        </div>
-      </section>
-      <section class="section">
-        <div class="info-card">
-          <span class="info-icon"
-            ><svg class="icon" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M12 7v5l3 2" /></svg></span
-          ><span
-            ><strong>Мы рядом с вами</strong
-            ><span>Москва · работаем каждый день кроме воскресенья</span></span
-          >
-        </div>
-      </section>
-      <section class="section" id="help">
-        <div class="section-head"><h2>Частые вопросы</h2></div>
-        <div class="faq">
-          <details>
-            <summary>Можно ли отменить запись?</summary>
-            <p>
-              Да, откройте раздел «Мои записи» прямо здесь и нажмите кнопку
-              отмены.
-            </p>
-          </details>
-          <details>
-            <summary>Как перенести визит?</summary>
-            <p>
-              Откройте «Мои записи», нажмите «Перенести» и выберите новое время.
-            </p>
-          </details>
-          <details>
-            <summary>Что взять с собой?</summary>
-            <p>
-              Только хорошее настроение. Мы бережно проведём консультацию и всё
-              объясним.
-            </p>
-          </details>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
     <nav>
       <div class="nav-inner">
@@ -987,6 +1016,11 @@
             <path d="M4 5h16v14H4z" />
             <path d="M8 9h8M8 13h5" /></svg
           >Услуги</button
+        ><button data-target="booking">
+          <svg viewBox="0 0 24 24">
+            <rect x="4" y="5" width="16" height="15" rx="2" />
+            <path d="M8 3v4M16 3v4M4 10h16M8 14h3M8 17h5" /></svg
+          >Запись</button
         ><button data-target="appointments">
           <svg viewBox="0 0 24 24">
             <path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" />
@@ -1169,31 +1203,45 @@
           : "Выберите врача и время приёма.";
         renderAppointments();
       }
+      const screenMap = {
+        home: "screen-home",
+        services: "screen-services",
+        booking: "screen-booking",
+        appointments: "screen-appointments",
+        help: "screen-help",
+      };
+      function showScreen(target) {
+        const screen = document.getElementById(screenMap[target]);
+        if (!screen) return;
+        document
+          .querySelectorAll(".screen")
+          .forEach((item) =>
+            item.classList.toggle("is-active", item === screen),
+          );
+        document.querySelectorAll("nav button").forEach((item) => {
+          if (item.dataset.target === target)
+            item.setAttribute("aria-current", "page");
+          else item.removeAttribute("aria-current");
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
       document.querySelectorAll("[data-service]").forEach((button) =>
         button.addEventListener("click", () => {
           state.service = button.dataset.service;
-          document
-            .getElementById("booking")
-            .scrollIntoView({ behavior: "smooth", block: "start" });
           renderBooking();
+          showScreen("booking");
         }),
       );
       document
         .querySelectorAll('[data-action="book"]')
         .forEach((button) =>
-          button.addEventListener("click", () =>
-            document
-              .getElementById("booking")
-              .scrollIntoView({ behavior: "smooth", block: "start" }),
-          ),
+          button.addEventListener("click", () => showScreen("booking")),
         );
       document
         .querySelectorAll("[data-scroll]")
         .forEach((button) =>
           button.addEventListener("click", () =>
-            document
-              .getElementById(button.dataset.scroll)
-              .scrollIntoView({ behavior: "smooth", block: "start" }),
+            showScreen(button.dataset.scroll),
           ),
         );
       function getAppointments() {
@@ -1248,9 +1296,7 @@
             state.time = appointment.time;
             state.editingId = appointment.id;
             renderBooking();
-            document
-              .getElementById("booking")
-              .scrollIntoView({ behavior: "smooth", block: "start" });
+            showScreen("booking");
           }),
         );
         list.querySelectorAll("[data-cancel]").forEach((button) =>
@@ -1286,9 +1332,7 @@
           "Запись сохранена в демо-режиме. Её можно перенести в разделе «Мои записи».";
         state.time = "";
         renderBooking();
-        document
-          .getElementById("appointments")
-          .scrollIntoView({ behavior: "smooth", block: "start" });
+        showScreen("appointments");
       });
       function updateClinicStatus() {
         const now = new Date();
@@ -1325,17 +1369,13 @@
       updateClinicStatus();
       setInterval(updateClinicStatus, 60000);
       renderBooking();
-      document.querySelectorAll("nav button").forEach((button) =>
-        button.addEventListener("click", () => {
-          const target = document.getElementById(button.dataset.target);
-          if (target)
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          document
-            .querySelectorAll("nav button")
-            .forEach((item) => item.removeAttribute("aria-current"));
-          button.setAttribute("aria-current", "page");
-        }),
-      );
+      document
+        .querySelectorAll("nav button")
+        .forEach((button) =>
+          button.addEventListener("click", () =>
+            showScreen(button.dataset.target),
+          ),
+        );
     </script>
   </body>
 </html>
