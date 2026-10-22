@@ -1010,9 +1010,7 @@
         border-radius: 10px;
       }
       .visual-card::after {
-        width: 190px;
-        height: 190px;
-        background: rgba(255, 255, 255, 0.1);
+        display: none;
       }
       .visual-card--blue {
         background: #155f8a;
@@ -1025,12 +1023,28 @@
         background: #ae6336;
       }
       .visual-card span {
-        font-size: 25px;
+        max-width: 100%;
+        font-size: clamp(18px, 5.3vw, 25px);
+        line-height: 1;
         letter-spacing: -0.08em;
       }
       .visual-card small {
+        max-width: 100%;
         color: rgba(255, 255, 255, 0.78);
+        font-size: 10px;
         letter-spacing: 0.02em;
+      }
+      .visual-card--violet span {
+        font-size: clamp(17px, 4.5vw, 22px);
+        white-space: nowrap;
+      }
+      .visual-card--orange img {
+        right: -30px;
+        bottom: -48px;
+        width: 138%;
+        height: 122%;
+        object-fit: cover;
+        object-position: 50% 45%;
       }
       .section {
         margin-top: 26px;
