@@ -2768,6 +2768,8 @@
       updateClinicStatus();
       setInterval(updateClinicStatus, 60000);
       renderBooking();
+      const requestedScreen = new URLSearchParams(window.location.search).get("screen");
+      showScreen(screenMap[requestedScreen] ? requestedScreen : "home");
       document
         .querySelectorAll("nav button")
         .forEach((button) =>
